@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  bottle:
+    build: .
+    ports:
+      - 8081:8081
+    depends_on:
+      - memcached
+  memcached:
+    image: memcached:1.5.22-alpine
