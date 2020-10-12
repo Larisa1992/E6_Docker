@@ -1,9 +1,8 @@
 FROM python:3
 
-RUN apt update
-RUN apt-get install memcached
+RUN apt-get update
 RUN mkdir /app
-COPY ./requirements.txt /app/requirements.txt
+COPY . /app
 WORKDIR /app
 RUN pip install -r requirements.txt
 COPY ./server.py /app/server.py

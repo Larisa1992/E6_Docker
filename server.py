@@ -1,6 +1,9 @@
 from bottle import route, run, request, HTTPError
 from pymemcache.client.base import Client
 import json
+import os
+
+MEMCACHED_HOST = os.environ.get('MEMCACHED_HOST')
 
 def json_serializer(key, value):
     if type(value) == str:
@@ -22,7 +25,7 @@ def fib(n):
 
 @route("/fib/<k:int>")
 def fib_handler(k):
-    client = Client(('localhost', 11211)
+    client = Client((MEMCACHED_HOST, '11211')
         , serializer=json_serializer
         , deserializer=json_deserializer) # клиент кэширования
     fib_result = client.get(str(k)) # число фибоначчи из кэша
@@ -31,9 +34,8 @@ def fib_handler(k):
         client.set(str(k), result)  # кэшируем число фибоначчи
     else: 
         result = fib_result
-    print(fib_result)
+    print('fib_result=', fib_result)
     return str(result)
-
 
 # client = Client(('localhost', 8080))
 # client.set(k, fib_handler(k))
