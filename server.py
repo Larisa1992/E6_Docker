@@ -15,7 +15,6 @@ def json_deserializer(key, value, flags):
         return value.decode("utf-8")
     if flags == 2:
         return json.loads(value.decode("utf-8"))
-    # raise Exception("Unknown serialization format")
 
 def fib(n):
     a, b = 1, 1
@@ -36,12 +35,6 @@ def fib_handler(k):
         result = fib_result
     print('fib_result=', fib_result)
     return str(result)
-
-# client = Client(('localhost', 8080))
-# client.set(k, fib_handler(k))
-# fib_result = client.get('some_key')
-# print(fib_result)
-
 
 if __name__ == "__main__":
     run(host="0.0.0.0", port=8081)

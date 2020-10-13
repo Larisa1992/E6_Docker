@@ -7,3 +7,6 @@ docker-compose build
 
 3) Запустите собранные образы командой
 docker-compose up
+
+4) Отправьте запро на получение числа Фибоначчи по пути http://localhost:8081/fib. Например:
+http://localhost:8081/fib/7
